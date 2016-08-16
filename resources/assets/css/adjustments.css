@@ -1,0 +1,46 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700);
+
+.btn i { margin-left: -3px !important; }
+
+.panel-body { padding: 15px; }
+
+.fixed-table-toolbar .search { margin-right: 5px; }
+
+.table { position: relative; top: 10px; margin-bottom: 10px; }
+.table * { font-size: 12px; }
+
+.table th {
+  background-color: #f3f7f9; padding: 9px 9px 7px 9px !important; opacity: 0.72; font-size: 13px; font-family:"Roboto Condensed", Arial, sans-serif; color: #76838f; cursor: default; -webkit-user-select: none; -moz-user-select: none; -user-select: none;
+}
+
+.table td {
+	padding: 7px !important;
+}
+
+.table td .btn { text-decoration: none; }
+
+.table th.sortable { cursor: pointer; }
+.table th.active { opacity: 1; }
+
+.table .arrow {
+	display: inline-block; vertical-align: middle; float: right; width: 0; height: 0; margin-top: 7px; margin-left: 5px; border-left: 4px solid transparent; border-right: 4px solid transparent;
+}
+
+.table .btn-icon i { font-size: 11px; }
+
+.table .arrow.asc { border-bottom: 4px solid #76838f; }
+.table .arrow.dsc { border-top: 4px solid #76838f; }
+
+.pagination { margin: 10px 0 0; }
+.pagination > .active a, .pagination > .active a:hover, .pagination > .active a:focus, .pagination > .active span, .pagination > .active span:hover, .pagination > .active span:focus { 
+	background-color: #a7bcd0; border-color: #a7bcd0; cursor: default;
+}
+.pagination-sm > li > a, .pagination-sm > li > span { cursor: pointer; font-size: 12px; }
+.entries { margin: 18px 0 0 3px; font-size: 12px; color: #8397ab; }
+
+.gridLoading td, .gridLoadingError td {
+	text-align: center;
+}
+.gridLoading tr:hover, .gridLoadingError tr:hover {
+	background-color: #fff !important;
+}
