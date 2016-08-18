@@ -12,11 +12,9 @@ class Permission extends GenericModel implements EntrustPermissionInterface {
     public static $tablename = 'permissions';
     protected $table = 'permissions';
 
-    public static $field_orderby_default = 'display_name';
-    public static $field_search_default = 'display_name';
-
-    public static $rules = [
-        'search_fields' => ['display_name']
+    protected $appends = [
+        'display_name',
+        'description'
     ];
 
     public static $transformers = [
@@ -27,5 +25,13 @@ class Permission extends GenericModel implements EntrustPermissionInterface {
 
     public function roles() {
         return $this->belongsToMany('\App\Domains\Models\Role');
+    }
+
+    public function getDisplayNameAttribute() {
+        return trans($this->getTable() . '.' . $this->getKey());
+    }
+
+    public function getDescriptionAttribute() {
+        return trans($this->getTable() . '.' . $this->getKey() . '_description');
     }
 }

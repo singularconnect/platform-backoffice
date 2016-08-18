@@ -29,7 +29,7 @@
 					@endrole
 					<li class="site-menu-item has-sub <?php if ($page === trans('translations')) { echo "open active"; } ?>">
 						<a href="javascript:void(0)">
-							<i class="site-menu-icon wb-world" aria-hidden="true"></i>
+							<i class="site-menu-icon wb-globe" aria-hidden="true"></i>
 							<span class="site-menu-title">{{ ucfirst(trans('translations')) }}</span>
 							<span class="site-menu-arrow"></span>
 						</a>

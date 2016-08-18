@@ -98,4 +98,9 @@ class I18nRepository {
 
         $this->translationRepository()->truncate();
     }
+
+    public function allFromLocale($id)
+    {
+        return $this->translationRepository()->find($id, ['index' => 'language']);
+    }
 }

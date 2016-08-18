@@ -3,7 +3,6 @@
 @section('content')
 	@include('standard::components.header')
 	@include('standard::components.menu')
-	
 	<!-- Page -->
 		<div class="page">
 			<div class="page-header">

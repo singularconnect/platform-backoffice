@@ -15,6 +15,10 @@ class TranslationsController extends BaseController
         return $this->respondWithCollection($res, $repository->getNewTransformer());
     }
 
+    public function showfile(I18nRepository $repository, $id) {
+        return $repository->allFromLocale($id);
+    }
+
     public function store(I18nRepository $repository, Request $request) {
         $inputs = $request->input();
 

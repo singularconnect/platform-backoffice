@@ -45,4 +45,5 @@ Route::get('permissions/{id}', ['as' => 'permissions.show', 'uses' => 'Permissio
 //id format -> SLUG
 Route::post('translations', ['as' => 'translations.store', 'uses' => 'TranslationsController@store']);
 Route::get('translations/{id}', ['as' => 'translations.show', 'uses' => 'TranslationsController@show'])->where(['id' => $regexOneLANG]);
+Route::get('translations/{id}.json', ['as' => 'translations.showfile', 'uses' => 'TranslationsController@showfile'])->where(['id' => $regexOneLANG]);
 Route::delete('translations/{id}/{key}', ['as' => 'translations.delete', 'uses' => 'TranslationsController@delete'])->where(['id' => $regexOneLANG, 'key' => $regexOneKEYI18N]);
