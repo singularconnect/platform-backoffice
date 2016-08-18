@@ -136,8 +136,6 @@ class I18nRepository {
             $aux[$t->context] = array_merge( $aux[$t->context], fnit($segs) );
         }
 
-        $aux['rand'] = rand(0, 100);
-
         return $aux;
     }
 }

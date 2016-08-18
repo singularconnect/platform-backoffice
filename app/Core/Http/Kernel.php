@@ -26,17 +26,17 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
+            \App\Core\Http\Middleware\LanguageResolve::class,
             \App\Core\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \App\Core\Http\Middleware\VerifyCsrfToken::class,
-            \App\Core\Http\Middleware\LanguageResolve::class
+            \App\Core\Http\Middleware\VerifyCsrfToken::class
         ],
 
         'api' => [
-            'throttle:60,1',
-            \App\Applications\Api\Http\Middleware\LanguageResolve::class
+            \App\Applications\Api\Http\Middleware\LanguageResolve::class,
+            'throttle:5,1'
         ],
     ];
 
@@ -52,7 +52,7 @@ class Kernel extends HttpKernel
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'can' => \Illuminate\Foundation\Http\Middleware\Authorize::class,
         'guest' => \App\Core\Http\Middleware\RedirectIfAuthenticated::class,
-        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'throttle' => \App\Applications\Api\Http\Middleware\ThrottleRequests::class,
 
         'role' => \Zizaco\Entrust\Middleware\EntrustRole::class,
         'permission' => \Zizaco\Entrust\Middleware\EntrustPermission::class,

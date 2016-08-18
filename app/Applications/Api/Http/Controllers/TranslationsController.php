@@ -7,6 +7,7 @@ use App\Applications\Api\Exceptions\ApiValidationException;
 use App\Domains\Repositories\I18nRepository;
 use App\Domains\Repositories\TranslationsRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class TranslationsController extends BaseController
 {
@@ -20,12 +21,10 @@ class TranslationsController extends BaseController
     }
 
     public function store(I18nRepository $repository, Request $request) {
-        $inputs = $request->input();
+        $iptrans = Arr::get($request->input(), 'translation');
 
-        if( !isset($inputs['translation']) || !is_array($inputs['translation']) )
+        if( empty($iptrans) || !is_array($iptrans) )
             throw new ApiException('Wrong format data');
-
-        $iptrans = $inputs['translation'];
 
         /** @var \Illuminate\Validation\Validator $validator */
         $validator = $repository->translationRepository()->validator($iptrans);
@@ -35,8 +34,8 @@ class TranslationsController extends BaseController
 
         $key = $iptrans['key'];
         $target = $iptrans['target'];
-        $context = isset($iptrans['context']) ? $iptrans['context'] : 'default';
-        $language = isset($iptrans['language']) ? $iptrans['language'] : 'en';
+        $context = Arr::get($iptrans, 'context');
+        $language = Arr::get($iptrans, 'language');
 
         $created = $repository->set($key, $target, $context, $language);
 
