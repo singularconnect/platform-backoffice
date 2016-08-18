@@ -139,6 +139,8 @@ class I18nRepository implements ChangeDBRepository {
             $aux[$t->context] = array_merge( $aux[$t->context], fnit($segs) );
         }
 
+        $aux['random'] = rand(0, 100);
+
         return $aux;
     }
 }
