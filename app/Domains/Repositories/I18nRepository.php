@@ -55,7 +55,7 @@ class I18nRepository {
     public function del($id, $context = null, $lang = null) {
         $key = $this->resolvedKeys($id, $context, $lang)[1];
 
-        Cache::forget('translations.' . $lang);
+        Cache::forget('like_i18n_file.' . $lang);
 
         $this->redis()->del($key);
 
@@ -73,7 +73,7 @@ class I18nRepository {
     public function set($id, $target, $context = null, $lang = null) {
         $key = $this->resolvedKeys($id, $context, $lang)[1];
 
-        Cache::forget('translations.' . $lang);
+        Cache::forget('like_i18n_file.' . $lang);
 
         $this->redis()->set($key, $target);
 
@@ -105,7 +105,7 @@ class I18nRepository {
     }
 
     public function getLikeI18nFile($id) {
-        $cached = Cache::rememberForever('translations.' . $id, function () use ($id) {
+        $cached = Cache::rememberForever('like_i18n_file.' . $id, function () use ($id) {
             $res = $this->translationRepository()->getByLanguage($id);
             return $this->formatLikeI18nFile($res);
         });
