@@ -1,10 +1,13 @@
 <?php
 namespace App\Domains\Repositories;
 
+use App\Domains\Repositories\Contracts\ChangeDBRepository;
+use App\Domains\Repositories\Traits\ChangeDBRepositoryTrait;
 use Illuminate\Redis\Database;
 use Cache;
 
-class I18nRepository {
+class I18nRepository implements ChangeDBRepository {
+    use ChangeDBRepositoryTrait;
 
     /**
      * @var Database

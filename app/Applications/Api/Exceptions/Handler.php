@@ -64,7 +64,7 @@ class Handler extends DefExceptionHandler
             ];
             $stat = $e->getStatusCode();
         }
-        else if( !($e instanceof ApiException) )
+        else if( !($e instanceof ApiException) && config('app.debug') )
             return parent::render($request, $e);
 
         return response($resp)->setStatusCode($stat);

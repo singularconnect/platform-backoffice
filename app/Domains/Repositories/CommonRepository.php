@@ -3,6 +3,8 @@
 namespace App\Domains\Repositories;
 
 use App\Domains\Exceptions\DuplicateKeyException;
+use App\Domains\Repositories\Contracts\ChangeDBRepository;
+use App\Domains\Repositories\Traits\ChangeDBRepositoryTrait;
 use Artesaos\Warehouse\AbstractCrudRepository;
 use Artesaos\Warehouse\Contracts\Segregated\CrudRepository;
 use brunojk\LaravelRethinkdb\Eloquent\Model;
@@ -11,7 +13,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use r;
 
-class CommonRepository extends AbstractCrudRepository implements CrudRepository {
+class CommonRepository extends AbstractCrudRepository implements CrudRepository, ChangeDBRepository {
+    use ChangeDBRepositoryTrait;
 
     protected $rulesPagination = [
         'page' => 'numeric',
