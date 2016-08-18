@@ -18,6 +18,6 @@ class Translation extends GenericModel {
     ];
 
     public static $transformers = [
-        'default' => TranslationTransfomer::class
+        'default' => TranslationTransfomer::class,
     ];
 }

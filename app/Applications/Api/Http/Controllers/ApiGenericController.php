@@ -13,6 +13,7 @@ use League\Fractal\Resource\Item;
 abstract class ApiGenericController extends CoreController
 {
     protected $statusCode = 200;
+    protected $fractal;
 
     public function __construct(Manager $fractal, Request $request) {
         $this->fractal = $fractal;
@@ -80,6 +81,6 @@ abstract class ApiGenericController extends CoreController
 
     protected function respondIfDeleted($res)
     {
-        return $res ? response('', 204) : response('', 304);
+        return $res ? response('', 204) : $this->respondNotModified();
     }
 }

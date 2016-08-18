@@ -16,7 +16,7 @@ class TranslationsController extends BaseController
     }
 
     public function showfile(I18nRepository $repository, $id) {
-        return $repository->allFromLocale($id);
+        return $repository->getLikeI18nFile($id);
     }
 
     public function store(I18nRepository $repository, Request $request) {

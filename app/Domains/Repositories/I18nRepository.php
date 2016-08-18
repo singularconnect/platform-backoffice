@@ -2,6 +2,7 @@
 namespace App\Domains\Repositories;
 
 use Illuminate\Redis\Database;
+use Cache;
 
 class I18nRepository {
 
@@ -54,6 +55,8 @@ class I18nRepository {
     public function del($id, $context = null, $lang = null) {
         $key = $this->resolvedKeys($id, $context, $lang)[1];
 
+        Cache::forget('translations.' . $lang);
+
         $this->redis()->del($key);
 
         return $this->translationRepository()->remove($key);
@@ -69,6 +72,8 @@ class I18nRepository {
 
     public function set($id, $target, $context = null, $lang = null) {
         $key = $this->resolvedKeys($id, $context, $lang)[1];
+
+        Cache::forget('translations.' . $lang);
 
         $this->redis()->set($key, $target);
 
@@ -99,8 +104,40 @@ class I18nRepository {
         $this->translationRepository()->truncate();
     }
 
-    public function allFromLocale($id)
-    {
-        return $this->translationRepository()->find($id, ['index' => 'language']);
+    public function getLikeI18nFile($id) {
+        $cached = Cache::rememberForever('translations.' . $id, function () use ($id) {
+            $res = $this->translationRepository()->getByLanguage($id);
+            return $this->formatLikeI18nFile($res);
+        });
+
+        return $cached;
+    }
+
+    protected function formatLikeI18nFile($res) {
+        $aux = [];
+
+        function fnit($val) {
+            $k = $val[0];
+            $r = array_slice($val, 1);
+
+            if( count($r) == 1 )
+                return [$k => $r[0]];
+
+            else
+                return [$k => fnit($r)];
+        }
+
+        foreach((object) $res as $t) {
+            $aux[$t->context] = isset($aux[$t->context]) ? $aux[$t->context] : [];
+
+            $segs = explode('.', $t->key);
+            $segs[] = $t->target;
+
+            $aux[$t->context] = array_merge( $aux[$t->context], fnit($segs) );
+        }
+
+        $aux['rand'] = rand(0, 100);
+
+        return $aux;
     }
 }

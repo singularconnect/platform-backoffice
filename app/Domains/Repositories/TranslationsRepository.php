@@ -14,6 +14,6 @@ class TranslationsRepository extends CommonRepository {
     }
 
     public function getByLanguage($lang) {
-        return $this->where('language', $lang)->get();
+        return $this->find($lang, ['index' => 'language']);
     }
 }
