@@ -19,9 +19,9 @@ class RolesController extends BaseController
     public function test(I18nRepository $repository) {
         $repository->inDB('apostala');
 
-        $repository->set('teste.veio_aqui', 'Veio Aqui', null, 'es');
+        $res = $repository->getLikeI18nFile('es');
 
         $repository->backToDefault();
-        return 'ok';
+        return $res;
     }
 }
