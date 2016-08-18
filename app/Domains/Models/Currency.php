@@ -2,7 +2,7 @@
 
 namespace App\Domains\Models;
 
-use App\Applications\Api\Transformers\CurrencyTransfomer;
+use App\Domains\Transformers\CurrencyTransfomer;
 
 class Currency extends GenericModel {
     public static $tablename = 'currencies';

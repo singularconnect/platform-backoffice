@@ -1,10 +1,10 @@
 <?php
-namespace App\Applications\Api\Transformers;
+namespace App\Domains\Transformers;
 
-use App\Domains\Models\User;
+use App\Domains\Models\Permission;
 use League\Fractal\TransformerAbstract;
 
-class UserTransfomer extends TransformerAbstract {
+class PermissionTransfomer extends TransformerAbstract {
 
     protected $availableIncludes = [
         'roles'
@@ -13,19 +13,19 @@ class UserTransfomer extends TransformerAbstract {
     /**
      * Turn this item object into a generic array
      *
-     * @param User $resource
+     * @param Permission $resource
      * @return array
      */
-    public function transform(User $resource)
+    public function transform(Permission $resource)
     {
         return [
             'id' => $resource->id,
-            'name' => $resource->name,
-            'email' => $resource->email,
+            'display_name' => $resource->display_name,
+            'description' => $resource->description,
         ];
     }
 
-    public function includeRoles(User $resource) {
+    public function includeRoles(Permission $resource) {
         $roles = $resource->roles;
 
         return $this->collection($roles, new RoleTransfomer);

@@ -2,7 +2,7 @@
 
 namespace App\Domains\Models;
 
-use App\Applications\Api\Transformers\ExchangeHistoricTransfomer;
+use App\Domains\Transformers\ExchangeHistoricTransfomer;
 
 class ExchangeHistoric extends GenericModel {
     //false but in the boot function allow only created_at

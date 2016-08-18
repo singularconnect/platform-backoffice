@@ -2,7 +2,7 @@
 
 namespace App\Domains\Models;
 
-use App\Applications\Api\Transformers\RoleTransfomer;
+use App\Domains\Transformers\RoleTransfomer;
 use App\Domains\Traits\EntrustRoleTrait;
 use Zizaco\Entrust\Contracts\EntrustRoleInterface;
 

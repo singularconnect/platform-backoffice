@@ -2,7 +2,7 @@
 
 namespace App\Domains\Models;
 
-use App\Applications\Api\Transformers\PermissionTransfomer;
+use App\Domains\Transformers\PermissionTransfomer;
 use App\Domains\Traits\EntrustPermissionTrait;
 use Zizaco\Entrust\Contracts\EntrustPermissionInterface;
 

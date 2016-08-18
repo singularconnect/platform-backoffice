@@ -4,9 +4,8 @@ namespace App\Applications\Api\Http\Controllers;
 
 use App\Applications\Api\Exceptions\ApiException;
 use App\Applications\Api\Exceptions\ApiValidationException;
-use App\Applications\Api\Transformers\CurrencyTransfomer;
+use App\Domains\Transformers\CurrencyTransfomer;
 use App\Domains\Exceptions\DuplicateKeyException;
-use App\Domains\Models\Currency;
 use App\Domains\Repositories\CurrenciesRepository;
 use Illuminate\Http\Request;
 use r;

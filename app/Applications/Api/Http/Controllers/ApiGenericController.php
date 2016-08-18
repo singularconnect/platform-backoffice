@@ -77,4 +77,9 @@ abstract class ApiGenericController extends CoreController
 
         return $this->respondWithArray($rootScope->toArray());
     }
+
+    protected function respondIfDeleted($res)
+    {
+        return $res ? response('', 204) : response('', 304);
+    }
 }

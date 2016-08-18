@@ -2,7 +2,7 @@
 
 namespace App\Domains\Models;
 
-use App\Applications\Api\Transformers\TranslationTransfomer;
+use App\Domains\Transformers\TranslationTransfomer;
 
 class Translation extends GenericModel {
     public static $tablename = 'translations';
@@ -10,11 +10,9 @@ class Translation extends GenericModel {
 
     public static $rules = [
         'default' => [
-            'id' => 'required_without_all:origin,language,context,key',
-            'origin' => 'required|in:app,plt',
-            'language' => 'required|string|between:2,5',
-            'context' => 'required|string|between:2,15',
-            'key' => 'required|alpha_dash|max:60',
+            'key' => 'required|string|max:60|regex:/^(\w+\.?\w+)+$/',
+            'language' => 'string|between:2,5',
+            'context' => 'string|between:2,15',
             'target' => 'required|string'
         ]
     ];

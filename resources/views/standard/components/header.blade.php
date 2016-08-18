@@ -2,8 +2,8 @@
 	
 	<div class="navbar-header">
 		<div class="navbar-brand navbar-brand-center">
-			<img class="navbar-brand-logo" src="{{ elixir('images/logo.png') }}" title="BackOffice SingularBet">
-			<span class="navbar-brand-text"> BackOffice SB</span>
+			<img class="navbar-brand-logo" src="{{ elixir('images/logo.png') }}" title="Platform Backoffice">
+			<span class="navbar-brand-text"> Platform Backoffice</span>
 		</div>
 	</div>
 

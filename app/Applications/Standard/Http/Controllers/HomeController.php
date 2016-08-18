@@ -12,14 +12,6 @@ use Illuminate\Validation\Validator;
 
 class HomeController extends BaseController
 {
-	protected $defData = [
-		'appTitle' => "Backoffice SingularBet",
-		'language' => 'pt-BR',
-
-		'pageTitle' => '',
-		'page' => '',
-		'subPage' => '',
-	];
 
 	public function __construct()
 	{}
@@ -27,14 +19,14 @@ class HomeController extends BaseController
 	//
 	public function home()
 	{
-		return "mah, mah, maaaaHh oe!";
+		return $this->dashboard();
 	}
 
 	//
 	public function dashboard()
 	{
-		$this->defData['pageTitle'] = 'Dashboard';
-		$this->defData['page']      = 'dashboard';
+		$this->defData['pageTitle'] = ucfirst(trans('dashboard'));
+		$this->defData['page']      = trans('dashboard');
 		$this->defData['subPage']   = '';
 
 		return $this->view('pages.dashboard', $this->defData);
@@ -43,11 +35,21 @@ class HomeController extends BaseController
 	//
 	public function users()
 	{
-		$this->defData['pageTitle'] = 'Users';
-		$this->defData['page']      = 'users';
-		$this->defData['subPage']   = '';
+		$this->defData['pageTitle'] = ucfirst(trans('users'));
+		$this->defData['page']      = trans('users');
+		$this->defData['subPage']   = trans('list');
 
 		return $this->view('pages.users.list', $this->defData);
+	}
+
+	//
+	public function translations()
+	{
+		$this->defData['pageTitle'] = ucfirst(trans('translations'));
+		$this->defData['page']      = trans('translations');
+		$this->defData['subPage']   = trans('list');
+
+		return $this->view('pages.translations.list', $this->defData);
 	}
 
 	//

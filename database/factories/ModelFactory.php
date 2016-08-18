@@ -36,12 +36,3 @@ $factory->define(App\Domains\Models\Permission::class, function (Faker\Generator
         'description' => $faker->sentence()
     ];
 });
-
-//$factory->define(App\Domains\Models\Translation::class, function (Faker\Generator $faker) {
-//    return [
-//        'context' => rand(0,1) ? 'app' : 'plt',
-//        'language' => rand(0,1) ? 'app' : 'plt',
-//        'key' => $faker->sentence(),
-//        'target' => $faker->sentence()
-//    ];
-//});

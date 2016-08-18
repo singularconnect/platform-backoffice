@@ -1,5 +1,5 @@
 <?php
-namespace App\Applications\Api\Transformers;
+namespace App\Domains\Transformers;
 
 use App\Domains\Models\Role;
 use League\Fractal\TransformerAbstract;

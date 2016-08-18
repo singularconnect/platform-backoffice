@@ -3,6 +3,7 @@
 $regexOneUUID = '[a-zA-Z0-9\-]{36}';
 $regexOneSLUG = '[a-z0-9_]+';
 $regexOneLANG = '[a-z]{2}(\-[a-zA-Z]{2})?';
+$regexOneKEYI18N = '(\w+\.?\w+)+';
 $regexOneCURR = '[A-Z]{3}';
 $regexOneEXCH = '[A-Z]{3}\:[A-Z]{3}';
 
@@ -12,7 +13,7 @@ $regexManyCURR = '('.$regexOneCURR.')(,'.$regexOneCURR.')*';
 $regexManyEXCH = '('.$regexOneEXCH.')(,'.$regexOneEXCH.')*';
 
 Route::get('currencies', ['as' => 'currencies', 'uses' => 'CurrenciesController@index']);
-Route::post('currencies', ['as' => 'currencies.store', 'uses' => 'CurrenciesController@store']);
+//Route::post('currencies', ['as' => 'currencies.store', 'uses' => 'CurrenciesController@store']);
 Route::get('currencies/default', ['as' => 'currencies.default', 'uses' => 'CurrenciesController@getDefault']);
 
 //id format -> BRL or USD
@@ -42,4 +43,6 @@ Route::get('permissions', ['as' => 'permissions', 'uses' => 'PermissionsControll
 Route::get('permissions/{id}', ['as' => 'permissions.show', 'uses' => 'PermissionsController@show'])->where(['id' => $regexManySLUG]);
 
 //id format -> SLUG
+Route::post('translations', ['as' => 'translations.store', 'uses' => 'TranslationsController@store']);
 Route::get('translations/{id}', ['as' => 'translations.show', 'uses' => 'TranslationsController@show'])->where(['id' => $regexOneLANG]);
+Route::delete('translations/{id}/{key}', ['as' => 'translations.delete', 'uses' => 'TranslationsController@delete'])->where(['id' => $regexOneLANG, 'key' => $regexOneKEYI18N]);

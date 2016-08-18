@@ -16,4 +16,5 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->get('/dashboard', ['as' => 'dashboard', 'uses' => 'HomeController@dashboard']);
 
     $router->get('/users', ['middleware' => ['role:admin|super_admin'], 'as' => 'users', 'uses' => 'HomeController@users']);
+    $router->get('/translations', ['middleware' => ['role:admin|super_admin'], 'as' => 'translations', 'uses' => 'HomeController@translations']);
 });

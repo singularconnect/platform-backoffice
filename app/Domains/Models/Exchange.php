@@ -2,7 +2,7 @@
 
 namespace App\Domains\Models;
 
-use App\Applications\Api\Transformers\ExchangeTransfomer;
+use App\Domains\Transformers\ExchangeTransfomer;
 
 class Exchange extends GenericModel {
     public $incrementing = false;

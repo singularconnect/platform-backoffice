@@ -34,10 +34,16 @@ class I18nRepository {
     }
 
     protected function resolvedKeys(&$id, &$context = null, &$lang = null) {
-        $keys = explode('.', $id);
-        $id = array_pop($keys); //last element, the key
-        $context = $context ?: (count($keys) ? array_pop($keys) : 'default');
-        $lang = count($keys) ? array_pop($keys) : $this->resolveLang($lang);
+        if( strpos($id, '.') === false )
+            $id = ($context ?: 'default') . '.' . $id;
+
+        $segments = explode('.', $id);
+        $group = $segments[0];
+        $item = implode('.', array_slice($segments, 1));
+
+        $id = $item; //last element, the key
+        $context = $context ?: $group;
+        $lang = $this->resolveLang($lang);
 
         $keyapp = "app.$lang.$context.$id";
         $keyplt = "plt.$lang.$context.$id";
@@ -46,7 +52,7 @@ class I18nRepository {
     }
 
     public function del($id, $context = null, $lang = null) {
-        $key = $this->resolvedKeys($id, $context, $lang)[0];
+        $key = $this->resolvedKeys($id, $context, $lang)[1];
 
         $this->redis()->del($key);
 
@@ -62,13 +68,13 @@ class I18nRepository {
     }
 
     public function set($id, $target, $context = null, $lang = null) {
-        $key = $this->resolvedKeys($id, $context, $lang)[0];
+        $key = $this->resolvedKeys($id, $context, $lang)[1];
 
         $this->redis()->set($key, $target);
 
         return $this->translationRepository()->create([
             'id' => $key,
-            'origin' => 'app',
+            'origin' => explode('.', $key)[0],
             'context' => $context,
             'key' => $id,
             'target' => $target,

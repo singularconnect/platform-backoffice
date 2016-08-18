@@ -8,7 +8,7 @@
 		
 					<div class="brand">
 						<img class="brand-img" src="{{ elixir('images/logo-blue.png') }}">
-						<h2 class="brand-text font-size-18">BackOffice SB</h2>
+						<h2 class="brand-text font-size-18">Platform Backoffice</h2>
 					</div>
 
 					{{ Form::open(array('route' => 'signin.post')) }}

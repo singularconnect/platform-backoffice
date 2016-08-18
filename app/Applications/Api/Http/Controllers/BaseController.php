@@ -4,12 +4,8 @@ namespace App\Applications\Api\Http\Controllers;
 
 use App\Applications\Api\Exceptions\ApiValidationException;
 use App\Applications\Api\Exceptions\SearchNotApplicableException;
-use App\Applications\Api\Transformers\CurrencyTransfomer;
-use App\Core\Http\Controllers\CoreController;
-use App\Domains\Models\GenericModel;
+use App\Domains\Transformers\CurrencyTransfomer;
 use App\Domains\Repositories\CommonRepository;
-use Illuminate\Contracts\Pagination\Paginator;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use Validator;
