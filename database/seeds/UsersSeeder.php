@@ -38,15 +38,15 @@ class UsersSeeder extends BaseSeeder
         $employee = $bruno->roles()->create(['id' => 'employee']);
         $this->i18n->set('roles.' . $employee->getKey(), 'Employee');
         $this->i18n->set('roles.' . $employee->getKey() . '_description', 'User employee standard');
-        $this->i18n->set('pt.roles.' . $employee->getKey(), 'Funcionário');
-        $this->i18n->set('pt.roles.' . $employee->getKey() . '_description', 'Usuário padrão para funcionários');
+        $this->i18n->set('roles.' . $employee->getKey(), 'Funcionário', null, 'pt');
+        $this->i18n->set('roles.' . $employee->getKey() . '_description', 'Usuário padrão para funcionários', null, 'pt');
 
         //create roles
         $super_admin = $bruno->roles()->create(['id' => 'super_admin']);
         $this->i18n->set('roles.' . $super_admin->getKey(), 'Super Admin');
         $this->i18n->set('roles.' . $super_admin->getKey() . '_description', 'Root user, can do everything!!');
-        $this->i18n->set('pt.roles.' . $super_admin->getKey(), 'Super Administrador');
-        $this->i18n->set('pt.roles.' . $super_admin->getKey() . '_description', 'Usuário de nível mais alto, pode fazer qualquer coisa!!');
+        $this->i18n->set('roles.' . $super_admin->getKey(), 'Super Administrador', null, 'pt');
+        $this->i18n->set('roles.' . $super_admin->getKey() . '_description', 'Usuário de nível mais alto, pode fazer qualquer coisa!!', null, 'pt');
 
         $fernando->roles()->attach([$super_admin->getKey(), $employee->getKey()]);
         $roberto->roles()->attach([$super_admin->getKey(), $employee->getKey()]);

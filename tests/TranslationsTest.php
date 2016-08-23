@@ -32,7 +32,7 @@ class TranslationsTest extends TestCase
     }
 
     public function testDefault() {
-        $this->i18n->set('en.default.hello_world', 'Hello World!');
+        $this->i18n->set('default.hello_world', 'Hello World!');
         $this->assertEquals('Hello World!', trans('hello_world'));
 
         $this->assertEquals(1, $this->translationsRepository->count());
@@ -44,7 +44,7 @@ class TranslationsTest extends TestCase
         $this->assertEquals('Hello World!', $t9n->target);
 
         //update
-        $this->i18n->set('en.default.hello_world', 'Hello World Updated!');
+        $this->i18n->set('default.hello_world', 'Hello World Updated!');
         $this->assertEquals('Hello World Updated!', trans('hello_world'));
 
         $this->assertEquals(1, $this->translationsRepository->count());
@@ -56,7 +56,7 @@ class TranslationsTest extends TestCase
         $this->assertEquals('Hello World Updated!', $t9n->target);
 
         //delete
-        $this->i18n->del('en.default.hello_world');
+        $this->i18n->del('default.hello_world');
         $this->assertEquals('default.hello_world', trans('hello_world'));
         $this->assertEquals('default.hello_world', trans('default.hello_world', [], 'outcome'));
         $this->assertNotEquals('default.hello_world', trans('outcome.hello_world'));
@@ -67,7 +67,7 @@ class TranslationsTest extends TestCase
         $this->assertNull($t9n);
 
 
-        $this->i18n->set('en.default.hello_world', 'Hello World!');
+        $this->i18n->set('default.hello_world', 'Hello World!');
         $this->assertNotEquals('Hello World!', trans('outcome.hello_world'));
         $this->assertEquals('Hello World!', trans('default.hello_world', [], 'outcome'));
         $this->assertEquals('Hello World!', trans('hello_world'));
@@ -82,9 +82,9 @@ class TranslationsTest extends TestCase
     }
 
     public function testDefaultLangs() {
-        $this->i18n->set('en.default.hello_world', 'Hello World!');
-        $this->i18n->set('pt.default.hello_world', 'Olá mundo!');
-        $this->i18n->set('es.default.hello_world', 'Hola mondo!');
+        $this->i18n->set('default.hello_world', 'Hello World!');
+        $this->i18n->set('default.hello_world', 'Olá mundo!', null, 'pt');
+        $this->i18n->set('default.hello_world', 'Hola mondo!', null, 'es');
 
         $this->assertEquals(3, $this->translationsRepository->count());
 
@@ -97,13 +97,13 @@ class TranslationsTest extends TestCase
         Lang::setLocale('fr');
         $this->assertEquals('Hello World!', trans('hello_world'));
 
-        $this->i18n->set('fr.default.hello_world', 'Bonjour tout le monde!');
+        $this->i18n->set('default.hello_world', 'Bonjour tout le monde!', null, 'fr');
         $this->assertEquals('Bonjour tout le monde!', trans('hello_world'));
 
         $this->assertEquals(4, $this->translationsRepository->count());
 
-        $this->i18n->set('en.messages.hello_world', 'Hello World msg!');
-        $this->i18n->set('pt.messages.hello_world', 'Olá Mundo msg!');
+        $this->i18n->set('messages.hello_world', 'Hello World msg!');
+        $this->i18n->set('messages.hello_world', 'Olá Mundo msg!', null, 'pt');
         $this->assertEquals('Hello World msg!', trans('messages.hello_world'));
         Lang::setLocale('pt');
         $this->assertEquals('Olá Mundo msg!', trans('messages.hello_world'));
