@@ -13,7 +13,29 @@ class TranslationsRepository extends CommonRepository {
         return parent::create($data, $options);
     }
 
-    public function getByLanguage($lang) {
-        return $this->find($lang, ['index' => 'language']);
+    public function getReducedByLanguageFullKey($lang) {
+        return $this->r()->getAll($lang, ['index' => 'language'])//->filter(['context' => 'default'])
+        ->map(function($doc){
+            return [ [$doc('id'), $doc('target')] ];
+        })
+            ->reduce(function($left, $right){
+                return $left->add($right);
+            })
+            ->rDefault([])
+            ->coerceTo('object')
+            ->run();
+    }
+
+    public function getReducedByLanguage($lang) {
+        return $this->r()->getAll($lang, ['index' => 'language'])//->filter(['context' => 'default'])
+            ->map(function($doc){
+                return [ [$doc('context')->add('.')->add($doc('key')), $doc('target')] ];
+            })
+            ->reduce(function($left, $right){
+                return $left->add($right);
+            })
+            ->rDefault([])
+            ->coerceTo('object')
+            ->run();
     }
 }

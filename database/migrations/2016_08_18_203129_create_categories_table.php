@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLeaguesTable extends Migration
+class CreateCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,7 @@ class CreateLeaguesTable extends Migration
      */
     public function up()
     {
-        Schema::create('leagues', function (Blueprint $table) {
-            $table->timestamps();
+        Schema::create('categories', function (Blueprint $table) {
         });
     }
 
@@ -24,6 +23,6 @@ class CreateLeaguesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('leagues');
+        Schema::drop('categories');
     }
 }

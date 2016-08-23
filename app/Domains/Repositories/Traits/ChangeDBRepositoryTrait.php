@@ -7,11 +7,11 @@ trait ChangeDBRepositoryTrait
         \DB::setDatabaseName($dbname);
     }
 
-    public function backTo($dbname) {
+    public function backToDB($dbname) {
         \DB::setDatabaseName($dbname);
     }
 
-    public function backToDefault() {
-        $this->backTo(env('DB_DATABASE', 'homestead'));
+    public function backToDefaultDB() {
+        $this->backToDB(env('DB_DATABASE', 'homestead'));
     }
 }

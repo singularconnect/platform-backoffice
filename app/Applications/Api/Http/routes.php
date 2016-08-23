@@ -1,7 +1,7 @@
 <?php
 
 $regexOneUUID = '[a-zA-Z0-9\-]{36}';
-$regexOneSLUG = '[a-z0-9_]+';
+$regexOneSLUG = '[a-z0-9_\-]+';
 $regexOneLANG = '[a-z]{2}(\-[a-zA-Z]{2})?';
 $regexOneKEYI18N = '(\w+\.?\w+)+';
 $regexOneCURR = '[A-Z]{3}';
@@ -44,6 +44,7 @@ Route::get('permissions/{id}', ['as' => 'permissions.show', 'uses' => 'Permissio
 
 //id format -> SLUG
 Route::post('translations', ['as' => 'translations.store', 'uses' => 'TranslationsController@store']);
+Route::get('translations/refresh/{id}', ['as' => 'translations.refresh', 'uses' => 'TranslationsController@refresh'])->where(['id' => $regexOneLANG]);
 Route::get('translations/{id}', ['as' => 'translations.show', 'uses' => 'TranslationsController@show'])->where(['id' => $regexOneLANG]);
 Route::get('translations/{id}.json', ['as' => 'translations.showfile', 'uses' => 'TranslationsController@showfile'])->where(['id' => $regexOneLANG]);
 Route::delete('translations/{id}/{key}', ['as' => 'translations.delete', 'uses' => 'TranslationsController@delete'])->where(['id' => $regexOneLANG, 'key' => $regexOneKEYI18N]);

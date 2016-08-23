@@ -13,10 +13,10 @@ interface ChangeDBRepository
      * @param string $dbname
      * @return void
      */
-    public function backTo($dbname);
+    public function backToDB($dbname);
 
     /**
      * @return void
      */
-    public function backToDefault();
+    public function backToDefaultDB();
 }

@@ -108,8 +108,9 @@ class I18nRepository implements ChangeDBRepository {
     }
 
     public function getLikeI18nFile($id) {
+//        Cache::forget('like_i18n_file.' . $id);
         $cached = Cache::rememberForever('like_i18n_file.' . $id, function () use ($id) {
-            $res = $this->translationRepository()->getByLanguage($id);
+            $res = $this->translationRepository()->getReducedByLanguage($id);
             return $this->formatLikeI18nFile($res);
         });
 
@@ -119,27 +120,25 @@ class I18nRepository implements ChangeDBRepository {
     protected function formatLikeI18nFile($res) {
         $aux = [];
 
-        function fnit($val) {
-            $k = $val[0];
-            $r = array_slice($val, 1);
+//        $aux['0random'] = rand(0, 100);
 
-            if( count($r) == 1 )
-                return [$k => $r[0]];
+        function fnit(&$t, $s, &$d) {
+            if( count($s) == 1 )
+                $d[$s[0]] = $t;
+            else {
+                $d[$s[0]] = isset($d[$s[0]])
+                    ? is_array($d[$s[0]]) ? $d[$s[0]] : ['_' => $d[$s[0]]]
+                    : [];
 
-            else
-                return [$k => fnit($r)];
+                fnit($t, array_slice($s, 1), $d[$s[0]]);
+            }
         }
 
-        foreach((object) $res as $t) {
-            $aux[$t->context] = isset($aux[$t->context]) ? $aux[$t->context] : [];
-
-            $segs = explode('.', $t->key);
-            $segs[] = $t->target;
-
-            $aux[$t->context] = array_merge( $aux[$t->context], fnit($segs) );
+        foreach($res as $k => $t) {
+            $s = explode('.', $k);
+            $aux[$s[0]] = isset($aux[$s[0]]) ? $aux[$s[0]] : [];
+            fnit($t, array_slice($s, 1), $aux[$s[0]]);
         }
-
-        $aux['random'] = rand(0, 100);
 
         return $aux;
     }
