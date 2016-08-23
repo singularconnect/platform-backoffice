@@ -18,7 +18,7 @@ class I18nRepository implements ChangeDBRepository {
      * @return Database
      */
     public function redis() {
-        $this->redis = $this->redis ?: app()->make('redis')->connection('translations');
+        $this->redis = $this->redis ?: app('redis')->connection('translations');
         return $this->redis;
     }
 
