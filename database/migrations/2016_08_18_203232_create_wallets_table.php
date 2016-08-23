@@ -13,7 +13,8 @@ class CreateWalletsTable extends Migration
     public function up()
     {
         Schema::create('wallets', function (Blueprint $table) {
-            $table->timestamps();
+            $table->index('created_at');
+            $table->index('updated_at');
         });
     }
 

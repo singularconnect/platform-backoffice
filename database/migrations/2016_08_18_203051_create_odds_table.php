@@ -13,7 +13,6 @@ class CreateOddsTable extends Migration
     public function up()
     {
         Schema::create('odds', function (Blueprint $table) {
-            $table->timestamps();
         });
     }
 

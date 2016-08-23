@@ -13,7 +13,6 @@ class CreateSportsTable extends Migration
     public function up()
     {
         Schema::create('sports', function (Blueprint $table) {
-            $table->timestamps();
         });
     }
 

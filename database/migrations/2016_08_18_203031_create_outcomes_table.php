@@ -13,7 +13,6 @@ class CreateOutcomesTable extends Migration
     public function up()
     {
         Schema::create('outcomes', function (Blueprint $table) {
-            $table->timestamps();
         });
     }
 
